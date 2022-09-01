@@ -28,6 +28,16 @@ const app = {
       singer: 'Phan Mạnh Quỳnh',
       path: './assets/music/song1.mp3',
       image: './assets/img/song1.png',
+      lyric:
+        'Ta từng là lẽ sống  Ta từng là ánh sáng nơi nhau  Nhưng điều luon nói trước đây,  cho rằng chuyện chẳng đổi thay  Hôm nay nên xem lại.  Ta chạy theo ý nghĩ riêng  Ta bận tâm những thứ xung quanh nhiều hơn  Không phải do kẻ thứ ba,  nhưng tại sao cứ cách xa  Dù được gần hơn trước.  Điều này giống như  ta đang phí phạm ngày giờ  và để cho tháng năm  trôi đi không nhiều đợi chờ  Người nói xem ta nên tiếp tục chuyện này  để làm gì cơ chứ?  Vì một khi đã ngưng cố gắng làm người kia vui,  ngay trong lúc ấy thấy như ta sai từ đầu.  Tình yêu luôn cần những ánh nắng, và gần đây thôi, đã mất.  Một trong hai điều anh nghĩ tới là ngừng bên nhau,  đôi khi thiếu vắng biết thêm yêu thương biết nhớ.  Thế nhưng rồi anh lại sợ,  lỡ chỉ mới đôi nơi,  ta lạc nhau cả đời.  Điều này giống như mây đen che mờ chuyện mình  làm nhạt nhòa mắt môi bên nhau như chịu cực hình  Người có nghe con tim bảo cần làm gì?  Hoặc là đã quá trễ!  Ta từng là lẽ sống,  ta từng là ánh sáng nơi nhau  Nhưng giờ đây bỗng quá xa Chỉ còn lại băng giá',
+    },
+    {
+      name: 'Nhạt',
+      singer: 'Phan Mạnh Quỳnh',
+      path: './assets/music/song1.mp3',
+      image: './assets/img/song1.png',
+      lyric:
+        'Ta từng là ánh sáng nơi nhau  Nhưng điều luon nói trước đây,  cho rằng chuyện chẳng đổi thay  Hôm nay nên xem lại.  Ta chạy theo ý nghĩ riêng  Ta bận tâm những thứ xung quanh nhiều hơn  Không phải do kẻ thứ ba,  nhưng tại sao cứ cách xa  Dù được gần hơn trước.  Điều này giống như  ta đang phí phạm ngày giờ  và để cho tháng năm  trôi đi không nhiều đợi chờ  Người nói xem ta nên tiếp tục chuyện này  để làm gì cơ chứ?  Vì một khi đã ngưng cố gắng làm người kia vui,  ngay trong lúc ấy thấy như ta sai từ đầu.  Tình yêu luôn cần những ánh nắng, và gần đây thôi, đã mất.  Một trong hai điều anh nghĩ tới là ngừng bên nhau,  đôi khi thiếu vắng biết thêm yêu thương biết nhớ.  Thế nhưng rồi anh lại sợ,  lỡ chỉ mới đôi nơi,  ta lạc nhau cả đời.  Điều này giống như mây đen che mờ chuyện mình  làm nhạt nhòa mắt môi bên nhau như chịu cực hình  Người có nghe con tim bảo cần làm gì?  Hoặc là đã quá trễ!  Ta từng là lẽ sống,  ta từng là ánh sáng nơi nhau  Nhưng giờ đây bỗng quá xa Chỉ còn lại băng giá',
     },
     {
       name: 'Khóc Cùng Em',
@@ -52,6 +62,18 @@ const app = {
       singer: 'Tăng Duy Tân',
       path: './assets/music/song5.mp3',
       image: './assets/img/song5.png',
+    },
+    {
+      name: 'Ngây Thơ',
+      singer: 'Tăng Duy Tân x Phong Max',
+      path: './assets/music/song6.mp3',
+      image: './assets/img/song6.png',
+    },
+    {
+      name: 'Thu cuối',
+      singer: 'Mr T x Yanbi x Hằng Bingboong',
+      path: './assets/music/song7.mp3',
+      image: './assets/img/song7.png',
     },
     {
       name: 'Ngây Thơ',
@@ -109,6 +131,7 @@ const app = {
         iterations: Infinity,
       }
     )
+
     cdThumbAnimate.pause()
     // xử lý phóng to thu nhỏ CD
     document.onscroll = function () {
@@ -148,7 +171,7 @@ const app = {
         const currentMinutes = Math.floor(this.currentTime / 60)
         const currentSecond = Math.floor(audio.currentTime % 60)
         $('#songCurrentTime').textContent = `0${currentMinutes}:${
-          currentSecond < 9 ? '0' + currentSecond : currentSecond
+          currentSecond <= 9 ? '0' + currentSecond : currentSecond
         }`
       }
     }
@@ -236,6 +259,13 @@ const app = {
         }
       }
     }
+    // show lyric
+    $('.lyrics').onclick = function () {
+      $('.canvasLyrics').classList.toggle('showLyric')
+    }
+    $('.close-lyric').onclick = function () {
+      $('.canvasLyrics').classList.remove('showLyric')
+    }
   },
   // định nghĩa thuộc tính cho obj
   defineProperties: function () {
@@ -251,6 +281,16 @@ const app = {
     heading.textContent = this.currentSong.name // lấy ra thuộc tính name ở obj song
     cdThumb.style.backgroundImage = `url('${this.currentSong.image}')` // lấy ra thuộc tính image gán vào CD
     audio.src = this.currentSong.path // lấy path bài hát gán vào src của thẻ audio
+
+    if (this.currentSong.lyric === undefined) {
+      $('.lyric').innerHTML = `<h3>Hiện tại chưa có lời bài hát </h3>`
+    } else {
+      const arrayLyric = this.currentSong.lyric.split('  ')
+      const ly = arrayLyric.map((value) => {
+        return `<span>${value}</span> <br/>`
+      })
+      $('.lyric').innerHTML = ly.join('')
+    }
   },
   // scroll to active song, bài hát đang play phải được hiện ra ở giao diện để không bị khất
   scrollToActiveSong: function () {

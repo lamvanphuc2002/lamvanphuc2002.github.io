@@ -1,6 +1,9 @@
 :root {
-  --primary-color: #ec1f55;
-  --text-color: #333;
+  --primary-color: #004445;
+  /* --blue-black: #021c1e; */
+  --rain: #2c7873;
+  --greenery: #6fb98f;
+  --text-color: #021c1e;
 }
 * {
   padding: 0;
@@ -31,12 +34,12 @@ html {
 }
 .dashboard {
   padding: 16px 16px 14px;
-  background-color: #fff;
+  background-color: var(--greenery);
   position: fixed;
   top: 0;
   width: 100%;
   max-width: 480px;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid var(--rain);
 }
 /* Header */
 
@@ -52,6 +55,43 @@ header h2 {
   color: var(--text-color);
   font-size: 20px;
 }
+header .lyrics {
+  position: absolute;
+  top: 13px;
+  right: 10px;
+}
+/* Lyrics */
+.canvasLyrics {
+  background-color: var(--greenery);
+  height: 100%;
+  width: 400px;
+  position: fixed;
+  /* top: -408px; */
+  top: 0;
+  right: 0;
+  transform: translate(400px);
+  transition: all 2s ease;
+  overflow: scroll;
+}
+.showLyric {
+  transform: translate(0px);
+  transition: all 2s ease;
+}
+.close-lyric {
+  background-color: var(--primary-color);
+  display: inline-block;
+  width: 30px;
+  color: var(--greenery);
+  text-align: center;
+  font-size: 20px;
+}
+
+p.lyric {
+  margin: 50px;
+  word-break: keep-all;
+  text-align: center;
+}
+
 /* CD */
 .cd {
   display: flex;
@@ -62,8 +102,7 @@ header h2 {
   width: 100%;
   padding-top: 100%;
   border-radius: 50%;
-  background-color: #333;
-
+  background-color: var(--greenery);
   background-size: cover;
   margin: auto;
 }
@@ -76,7 +115,7 @@ header h2 {
   padding: 19px 0 8px 0;
 }
 .control .btn {
-  color: #666;
+  color: var(--rain);
   padding: 18px;
   font-size: 18px;
 }
@@ -98,7 +137,7 @@ header h2 {
   width: 100%;
   -webkit-appearance: none;
   height: 6px;
-  background-color: #d3d3d3;
+  background-color: var(--rain);
   outline: none;
   opacity: 0.7;
   -webkit-transition: 0.2s;
@@ -110,7 +149,7 @@ header h2 {
   appearance: none;
   width: 12px;
   height: 6px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
   cursor: pointer;
 }
 /* time song */
@@ -127,13 +166,14 @@ header h2 {
 .playlist {
   margin-top: 408px;
   padding: 12px;
-  background-color: #f5f5f5;
+  padding-top: 24px;
+  background-color: var(--greenery);
 }
 .song {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  background-color: #fff;
+  background-color: var(--rain);
   padding: 8px 16px;
   border-radius: 5px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
